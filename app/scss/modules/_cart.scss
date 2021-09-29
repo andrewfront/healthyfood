@@ -1,0 +1,83 @@
+.header__cart-center {
+        position: relative;
+    }
+    .header__cart-overlay {
+        position: absolute;
+        top: 60px;
+        right: 0;
+        background-color: $orange;
+        border-radius: 15px;
+        width: 521px;
+        z-index: 3;
+    }
+    .header__cart-close {
+        position: absolute;
+        top: 35px;
+        right: -25px;
+        cursor: pointer;
+    }
+    .header__cart-wrapper {
+        overflow-y: auto;
+        height: 143px;
+    }
+    .header__cart-content {
+        padding: 41px 22px 40px 10px;
+        border-bottom: 1px solid $black;
+    }
+    .header__cart-content {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    .header__cart-image {
+        width: 144px;
+        height: 61px;
+        object-fit: cover;
+    }
+    .header__cart-info {
+        font-weight: 600;
+        font-size: 20px;
+        color: $black;
+    }
+    .header__cart-footer {
+        padding: 37px 22px 36px 33px;
+    }
+    .header__cart-footer__content {
+        margin-bottom: 43px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-weight: 600;
+        font-size: 20px;
+        color: $black;
+    }
+    .header__cart-footer__gotonext {
+        padding: 15px 20px;
+        background-color: $red;
+        border: none;
+        border-radius: 15px;
+        color: $white;
+        cursor: pointer;
+        transition: background-color 0.3s ease-in-out;
+        &:hover {
+            background-color: #dd2d2d;
+        }
+    }
+    .header__cart-remove {
+        cursor: pointer;
+    }
+    .header__cart-footer__order {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+    }
+    .header__cart-footer__order-label {
+        max-width: 100%;
+    }
+    .header__cart-footer__order-input {
+        width: 100%;
+        padding: 15px 20px;
+        margin-bottom: 15px;
+        border-radius: 15px;
+        border: none;
+    }

@@ -1,0 +1,28 @@
+$bg: #25272E;
+$white: #ffffff;
+$orange: #FCC232;
+$red: #FF6060;
+$grey: #3C3F4A;
+$black: #000000;
+%opensans {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+}
+
+%regular {
+    font-family: 'Raleway', sans-serif;
+    font-weight: 400;
+}
+%bold {
+    font-family: 'Raleway', sans-serif;
+    font-weight: 700;
+}
+
+
+// @function max($numbers...) {
+//     @return m#{a}x(#{$numbers});
+// }
+
+// @function min($numbers...) {
+//     @return m#{i}n(#{$numbers});
+// }

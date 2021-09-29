@@ -1,0 +1,48 @@
+.headertop {
+    margin-bottom: 167px;
+    position: relative;
+    margin-top: 227px;
+    &__inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    &__content {
+        max-width: 734px;
+        text-align: right;
+        z-index: 2;
+    }
+    &__title {
+        margin-bottom: 92px;
+        font-weight: 700;
+        font-size: 90px;
+line-height: 106px;
+    }
+    &__subtitle {
+        font-weight: 700;
+        font-size: 20px;
+        line-height: 33px;
+    }
+    &__btn {
+        text-align: center;
+    }
+    &__menubtn {
+        // display: inline-block;
+        padding: 25px 50px;
+        border-radius: 30px;
+        background-color: $grey;
+        font-size: 24px;
+        line-height: 28px;
+        transition: all 0.3s ease-in-out;
+        &:hover {
+            background-color: $red;
+            color: $black;
+        }
+    }
+    &__pepper {
+        position: absolute;
+        right: 0;
+        bottom: -72px;
+        z-index: 1;
+    }
+}

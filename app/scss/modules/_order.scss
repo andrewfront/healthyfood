@@ -1,0 +1,75 @@
+.order {
+    margin-bottom: 103px;
+
+    &__inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    &__form {
+        max-width: 613px;
+        width: 100%;
+        padding: 68px 64px 71px 64px;
+        border-radius: 25px;
+        background-color: $orange;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    &__subtitle {
+        margin-bottom: 61px;
+        font-size: 30px;
+        line-height: 35px;
+        font-weight: 700;
+        color: $black;
+    }
+
+    &__label {
+        max-width: 490px;
+        width: 100%;
+    }
+    &__label--first {
+        position: relative;
+    }
+    &__cucumber {
+        position: absolute;
+        right: 0;
+        bottom: 125px;
+    }
+    &__main {
+        width: 100%;
+        margin-bottom: 62px;
+        background-color: $white;
+        padding: 20px;
+        border: none;
+        border-radius: 10px;
+
+        &::placeholder {
+            font-size: 26px;
+            line-height: 31px;
+            font-weight: 700;
+            color: $black;
+        }
+    }
+
+    &__submit {
+        max-width: 324px;
+        padding: 16px 109px;
+        background-color: $red;
+        color: $black;
+        border-radius: 10px;
+        font-weight: 700;
+        font-size: 26px;
+line-height: 31px;
+        border: none;
+        cursor: pointer;
+        transition: background-color 0.3s ease-in-out;
+
+        &:hover {
+            background-color: #dd2d2d;
+        }
+    }
+
+}

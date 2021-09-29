@@ -1,0 +1,11 @@
+.contact {
+    margin-bottom: 50px;
+    &__map {
+        max-width: 100%;
+        height: 587px;
+        background-color: $white;
+    }
+    .gm-style-iw-d {
+        color: $black;
+    }
+}
