@@ -86,6 +86,43 @@
 /************************************************************************/
 /******/ ({
 
+/***/ "./app/js/modules/burger.js":
+/*!**********************************!*\
+  !*** ./app/js/modules/burger.js ***!
+  \**********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+const burger = () => {
+  const burgerBtn = document.querySelector('#js-hamburger');
+  const nav = document.querySelector('.header__nav');
+  const navLink = document.querySelectorAll('.header__nav-link');
+  burgerBtn.addEventListener('click', () => {
+    burgerBtn.classList.toggle('activate');
+
+    if (burgerBtn.classList.contains('activate')) {
+      nav.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    } else {
+      nav.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+  });
+  navLink.forEach(link => {
+    link.addEventListener('click', e => {
+      e.preventDefault();
+      nav.classList.remove('active');
+      burgerBtn.classList.remove('activate');
+    });
+  });
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (burger);
+
+/***/ }),
+
 /***/ "./app/js/modules/map.js":
 /*!*******************************!*\
   !*** ./app/js/modules/map.js ***!
@@ -198,6 +235,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var swiper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! swiper */ "./node_modules/swiper/swiper.esm.js");
 /* harmony import */ var _modules_slider__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/slider */ "./app/js/modules/slider.js");
 /* harmony import */ var _modules_map__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/map */ "./app/js/modules/map.js");
+/* harmony import */ var _modules_burger__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/burger */ "./app/js/modules/burger.js");
 __webpack_require__(/*! es6-promise-polyfill */ "./node_modules/es6-promise-polyfill/promise.js");
 
 
@@ -205,9 +243,11 @@ __webpack_require__(/*! es6-promise-polyfill */ "./node_modules/es6-promise-poly
 swiper__WEBPACK_IMPORTED_MODULE_1__["default"].use([swiper__WEBPACK_IMPORTED_MODULE_1__["Autoplay"]]);
 
 
+
 window.addEventListener('DOMContentLoaded', () => {
   Object(_modules_slider__WEBPACK_IMPORTED_MODULE_2__["default"])();
   Object(_modules_map__WEBPACK_IMPORTED_MODULE_3__["default"])();
+  Object(_modules_burger__WEBPACK_IMPORTED_MODULE_4__["default"])();
   const date = document.querySelector('.footer__text span');
   date.textContent = new Date().getFullYear();
 });

@@ -1,5 +1,6 @@
 html,
 body {
+    position: relative;
     @extend %regular;
     height: 100%;
     font-size: 20px;
@@ -32,3 +33,23 @@ body {
 line-height: 68px;
 text-transform: uppercase;
 }
+@media (max-width: 992px) {
+    .title {
+        margin-bottom: 50px;
+    }
+    }
+    @media (max-width: 575px) {
+        #tiptext {
+            width: 200px;
+        }
+        #tiptext::before {
+            display: none;
+        }
+        .service__tip-text--before {
+            top: -150px !important;
+            left: -10px !important;
+        }
+        .service__tip-text__left {
+            top: -150px !important;
+        }
+        }

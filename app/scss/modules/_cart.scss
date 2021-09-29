@@ -2,6 +2,7 @@
         position: relative;
     }
     .header__cart-overlay {
+        display: none;
         position: absolute;
         top: 60px;
         right: 0;
@@ -12,7 +13,7 @@
     }
     .header__cart-close {
         position: absolute;
-        top: 35px;
+        top: -23px;
         right: -25px;
         cursor: pointer;
     }
@@ -52,6 +53,7 @@
         color: $black;
     }
     .header__cart-footer__gotonext {
+        text-transform: uppercase;
         padding: 15px 20px;
         background-color: $red;
         border: none;

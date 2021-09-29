@@ -97,3 +97,36 @@ line-height: 35px;
     z-index: -1;
 }
 }
+@media (max-width: 1410px) {
+    .service {
+        margin-bottom: 50px;
+    }
+    .service__subtitle {
+        font-size: 20px;
+    }
+    .service__text {
+        font-size: 18px;
+    }
+    }
+    @media (max-width: 992px) {
+        .service__pear {
+            display: none;
+        }
+        .service__item {
+            flex-direction: column;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+        .service__item:not(:last-child) {
+            margin-bottom: 20px;
+        }
+        .service__item-left {
+            align-items: flex-end;
+        }
+        .service__img--right {
+            margin-bottom: 24px;
+        }
+        .service__img--left {
+            margin-top: 24px;
+        }
+        }
