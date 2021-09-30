@@ -57,3 +57,35 @@ line-height: 16px;
 color: $black;
     }
 }
+@media (max-width: 1391px) {
+    .features {
+        margin-bottom: 50px;
+    }
+    .features__wrapper {
+        grid-template-columns: repeat(50%, 1fr);
+        gap: 10px;
+    }
+    }
+    @media (max-width: 949px) {
+        .features__slide {
+            width: 519px;
+        }
+        }
+        @media (max-width: 484px) {
+            .features__slide {
+                width: 300px;
+            }
+            .features__content {
+                max-width: 250px;
+            }
+            }
+            @media (max-width: 371px) {
+                .features__content {
+                    max-width: 215px;
+                }
+                }
+                @media (max-width: 331px) {
+                    .features__title-main {
+                        font-size: 46px;
+                    }
+                    }

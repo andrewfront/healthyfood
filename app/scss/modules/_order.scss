@@ -58,7 +58,7 @@
         max-width: 324px;
         padding: 16px 109px;
         background-color: $red;
-        color: $black;
+        color: $white;
         border-radius: 10px;
         font-weight: 700;
         font-size: 26px;
@@ -73,3 +73,28 @@ line-height: 31px;
     }
 
 }
+@media (max-width: 992px) {
+    .order {
+        margin-bottom: 50px;
+    }
+    .order__inner {
+        justify-content: center;
+    }
+    .order__decor {
+        display: none;
+    }
+    }
+    @media (max-width: 484px) {
+        .order__form {
+            padding: 68px 10px;
+        }
+        .order__submit {
+            padding: 16px 0;
+            max-width: none;
+    width: 100%;
+        }
+        .order__cucumber {
+            right: -19px;
+    bottom: 276px;
+        }
+        }

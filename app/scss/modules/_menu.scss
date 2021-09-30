@@ -73,3 +73,34 @@
         }
     }
 }
+@media (max-width: 1416px) {
+    .menu__btn-container {
+        display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    }
+    .menu__btn {
+        margin-bottom: 5px;
+    }
+    .menu__inner {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(318px, 1fr));
+        gap: 10px;
+    }
+    }
+    @media (max-width: 1416px) {
+        .menu__inner {
+            justify-items: center;
+        }
+        }
+        @media (max-width: 353px) {
+            .menu__inner {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+                gap: 10px;
+            }
+            .menu__addtocart {
+                font-size: 14px;
+            }
+            }

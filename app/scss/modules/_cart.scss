@@ -83,3 +83,18 @@
         border-radius: 15px;
         border: none;
     }
+    @media (max-width: 992px) {
+        .header__cart-overlay {
+            position: fixed;
+            width: 100%;
+        }
+        .header__cart-close {
+            top: 5px;
+            right: 13px;
+        }
+        }
+        @media (max-width: 351px) {
+.header__cart-info {
+    font-size: 16px;
+}
+            }

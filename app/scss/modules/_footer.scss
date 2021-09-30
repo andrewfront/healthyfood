@@ -23,3 +23,13 @@
     }
 }
 }
+@media (max-width: 578px) {
+    .footer__text {
+        font-size: 14px;
+    }
+    }
+    @media (max-width: 425px) {
+        .footer__text {
+            font-size: 9px;
+        }
+        }

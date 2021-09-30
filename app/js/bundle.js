@@ -200,12 +200,23 @@ __webpack_require__.r(__webpack_exports__);
 
 const slider = () => {
   const swiperMain = new swiper__WEBPACK_IMPORTED_MODULE_0__["default"]('.features__swiper', {
-    loop: true,
+    loop: false,
     grabCursor: true,
     slidesPerView: 3,
     speed: 1000,
     autoplay: {
       delay: 2000
+    },
+    breakpoints: {
+      250: {
+        slidesPerView: 1
+      },
+      909: {
+        slidesPerView: 2
+      },
+      1391: {
+        slidesPerView: 3
+      }
     }
   });
   const tipsContainer = document.querySelector('.features__swiper');
