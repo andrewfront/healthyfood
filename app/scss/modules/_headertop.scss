@@ -2,6 +2,7 @@
     margin-bottom: 167px;
     position: relative;
     margin-top: 227px;
+
     &__inner {
         display: flex;
         align-items: center;
@@ -12,33 +13,65 @@
         text-align: right;
         z-index: 2;
     }
+
     &__title {
         margin-bottom: 92px;
         font-weight: 700;
         font-size: 90px;
-line-height: 106px;
+        line-height: 106px;
+        animation-duration: 2s;
+        animation-name: slit-in-diagonal-1;
     }
+
+    @keyframes slit-in-diagonal-1 {
+        0% {
+            -webkit-transform: translateZ(-800px) rotate3d(1, 1, 0, 90deg);
+            transform: translateZ(-800px) rotate3d(1, 1, 0, 90deg);
+            -webkit-animation-timing-function: ease-in;
+            animation-timing-function: ease-in;
+            opacity: 0;
+        }
+
+        54% {
+            -webkit-transform: translateZ(-160px) rotate3d(1, 1, 0, 87deg);
+            transform: translateZ(-160px) rotate3d(1, 1, 0, 87deg);
+            -webkit-animation-timing-function: ease-in-out;
+            animation-timing-function: ease-in-out;
+            opacity: 1;
+        }
+
+        100% {
+            -webkit-transform: translateZ(0) rotate3d(1, 1, 0, 0);
+            transform: translateZ(0) rotate3d(1, 1, 0, 0);
+            -webkit-animation-timing-function: ease-out;
+            animation-timing-function: ease-out;
+        }
+    }
+
     &__subtitle {
         font-weight: 700;
         font-size: 20px;
         line-height: 33px;
     }
+
     &__btn {
         text-align: center;
     }
+
     &__menubtn {
-        // display: inline-block;
         padding: 25px 50px;
         border-radius: 30px;
         background-color: $grey;
         font-size: 24px;
         line-height: 28px;
         transition: all 0.3s ease-in-out;
+
         &:hover {
             background-color: $red;
             color: $black;
         }
     }
+
     &__pepper {
         position: absolute;
         right: 0;
@@ -46,52 +79,63 @@ line-height: 106px;
         z-index: 1;
     }
 }
+
 @media (max-width: 1281px) {
-.headertop__title {
-    margin-bottom: 0;
-    font-size: 42px;
+    .headertop__title {
+        margin-bottom: 0;
+        font-size: 42px;
+    }
 }
-}
+
 @media (max-width: 1104px) {
     .headertop {
         margin-top: 118px;
     }
+
     .headertop__inner {
         margin-bottom: 110px;
     }
+
     .headertop__pepper {
         display: none;
     }
+}
+
+@media (max-width: 1104px) {
+    .headertop {
+        margin-top: 118px;
+        margin-bottom: 50px;
     }
-    @media (max-width: 1104px) {
-        .headertop {
-            margin-top: 118px;
-            margin-bottom: 50px;
-        }
-        }
-    @media (max-width: 763px) {
-        .headertop__img {
-            display: none;
-        }
-        .headertop__content {
-            text-align: center;
-        }
-        }
-        @media (max-width: 573px) {
-            .headertop__inner {
-                margin-bottom: 55px;
-            }
-            .headertop__title {
-                font-size: 32px;
-                line-height: 64px;
-            }
-            .headertop__subtitle {
-                font-size: 14px;
-                line-height: 27px;
-            }
-            .headertop__menubtn {
-                font-size: 18px;
-                text-transform: uppercase;
-                background-color: $red;
-            }
-            }
+}
+
+@media (max-width: 763px) {
+    .headertop__img {
+        display: none;
+    }
+
+    .headertop__content {
+        text-align: center;
+    }
+}
+
+@media (max-width: 573px) {
+    .headertop__inner {
+        margin-bottom: 55px;
+    }
+
+    .headertop__title {
+        font-size: 32px;
+        line-height: 64px;
+    }
+
+    .headertop__subtitle {
+        font-size: 14px;
+        line-height: 27px;
+    }
+
+    .headertop__menubtn {
+        font-size: 18px;
+        text-transform: uppercase;
+        background-color: $red;
+    }
+}

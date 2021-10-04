@@ -19,14 +19,14 @@
     <div class="container">
         <div class="header__inner">
             <div class="header__content">
-                <a href="" class="header__logo">Healthy<span>food</span></a>
+                <a data-scroll="#header" href="#" class="header__logo">Healthy<span class="click">food</span></a>
                 <nav class="header__nav">
                     <ul class="header__nav-list">
-                        <li class="header__nav-item"><a class="header__nav-link" href="#">Service</a></li>
-                        <li class="header__nav-item"><a class="header__nav-link" href="#">Menu</a></li>
-                        <li class="header__nav-item"><a class="header__nav-link" href="#">Order</a></li>
-                        <li class="header__nav-item"><a class="header__nav-link" href="#">Our best</a></li>
-                        <li class="header__nav-item"><a class="header__nav-link" href="#">Contact</a></li>
+                        <li class="header__nav-item"><a data-scroll="#services" class="header__nav-link" href="#">Service</a></li>
+                        <li class="header__nav-item"><a data-scroll="#menu" class="header__nav-link" href="#">Menu</a></li>
+                        <li class="header__nav-item"><a data-scroll="#order" class="header__nav-link" href="#">Order</a></li>
+                        <li class="header__nav-item"><a data-scroll="#ourbest" class="header__nav-link" href="#">Our best</a></li>
+                        <li class="header__nav-item"><a data-scroll="#contact" class="header__nav-link" href="#">Contact</a></li>
                     </ul>
                 </nav>
                 <div class="header__cart-center">
@@ -87,13 +87,13 @@
             </div>
         </div>
         <div class="headertop__btn">
-        <a href="" class="headertop__menubtn">Explore menu</a>
+        <a data-scroll="#menu" href="" class="headertop__menubtn">Explore menu</a>
         <img src="images/header/pepper.svg" alt="pepper" class="headertop__pepper">
     </div>
     </div>
 </div>
         <main class="main">
-            <div class="service">
+            <div class="service" id="services">
     <div class="container">
         <h2 class="title service__title">SERVICE</h2>
         <div class="service__item">
@@ -159,7 +159,7 @@
     </div>
     <img src="images/service/pear.svg" alt="pear" class="service__pear">
 </div>
-            <div class="menu">
+            <div class="menu" id="menu">
     <div class="container">
         <h2 class="title menu__title">MENU</h2>
         <div class="menu__btn-container">
@@ -224,7 +224,7 @@
         </div>
     </div>
 </div>
-            <div class="order">
+            <div class="order" id="order">
     <div class="container">
         <h2 class="title order__title">ORDER</h2>
         <div class="order__inner">
@@ -243,7 +243,7 @@
         </div>
     </div>
 </div>
-            <div class="features">
+            <div class="features" id="ourbest">
     <div class="container">
         <h2 class="title features__title-main">our best</h2>
         <div class="features__inner">
@@ -352,7 +352,7 @@
         </div>
     </div>
 </div>
-            <div class="contact">
+            <div class="contact" id="contact">
     <div class="container">
         <h2 class="title contact__title">CONTACT</h2>
         <div class="contact__inner">
@@ -367,7 +367,7 @@
             <p class="footer__text">
                 Copyright by Andrew, <span></span> | wish to live in MIAMI
             </p>
-            <img src="images/heart.svg" alt="heart" class="footer__img">
+            <img src="images/heart.svg" alt="heart" class="footer__img footer__img--heart heartbeat">
             <img src="images/smile.svg" alt="heart" class="footer__img">
         </div>
     </div>

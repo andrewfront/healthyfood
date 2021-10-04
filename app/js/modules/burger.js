@@ -17,6 +17,7 @@ navLink.forEach(link => {
         e.preventDefault()
         nav.classList.remove('active')
         burgerBtn.classList.remove('activate')
+        document.body.style.overflow = ''
     })
 })
 }
