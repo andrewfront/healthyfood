@@ -33,6 +33,13 @@ body {
 line-height: 68px;
 text-transform: uppercase;
 }
+.order {
+.js-validate-error-label {
+    position: absolute;
+    left: 10px;
+    top: 80px;
+}
+}
 @media (max-width: 992px) {
     .title {
         margin-bottom: 50px;

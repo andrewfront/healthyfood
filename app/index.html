@@ -32,24 +32,26 @@
                 <div class="header__cart-center">
                     <button class="header__cart"><svg class="header__cart-img">
                             <use xlink:href="#cart"></use>
-                        </svg><span class="header__cart-count">1</span></button>
+                        </svg><span class="header__cart-count">0</span></button>
                     <div class="header__cart-overlay">
                         <div class="header__cart-wrapper">
-                            <div class="header__cart-content">
+                            <!-- <div class="header__cart-content">
                                 <img src="images/cart/img1.jpg" alt="product" class="header__cart-image">
                                 <div class="header__cart-info">
+                                    <div class="header__cart-flex">
                                     <div class="header__cart-title">Fried Chicken</div>
                                     <div class="header__cart-price">5.75 $</div>
                                 </div>
+                                    <div class="header__cart-footer__content">
+                                        <div class="header__cart-footer__amount">Amount: <span>1</span></div>
+                                        <div class="header__cart-footer__total">Total: <span>5.75$</span></div>
+                                    </div>
+                                </div>
                                 <img src="images/cart/close.svg" alt="close" class="header__cart-close">
                                 <img src="images/cart/delete.svg" alt="bucket" class="header__cart-remove">
-                            </div>
+                            </div> -->
                         </div>
                         <div class="header__cart-footer">
-                            <div class="header__cart-footer__content">
-                                <div class="header__cart-footer__amount">Amount: <span>1</span></div>
-                                <div class="header__cart-footer__total">Total: <span>5.75$</span></div>
-                            </div>
                             <form action="#" class="header__cart-footer__order">
                                 <label class="header__cart-footer__order-label">
                                     <input type="text" class="header__cart-footer__order-input" placeholder="Name" name="name">
@@ -173,7 +175,7 @@
             <button type="button" class="menu__btn" data-id="fastfood">Fastfood</button>
         </div>
         <div class="menu__inner">
-            <div class="menu__item">
+            <!-- <div class="menu__item">
                 <img src="images/menu/img1.jpg" alt="menu" class="menu__img">
                 <div class="menu__content">
                     <div class="menu__subtitle">Fried Chicken</div>
@@ -184,8 +186,8 @@
                 </div>
                     <button type="button" class="menu__addtocart">Add to cart</button>
                 </div>
-            </div>
-            <div class="menu__item">
+            </div> -->
+            <!-- <div class="menu__item">
                 <img src="images/menu/img2.jpg" alt="menu" class="menu__img">
                 <div class="menu__content">
                     <div class="menu__subtitle">Omlet</div>
@@ -220,7 +222,7 @@
                 </div>
                     <button type="button" class="menu__addtocart">Add to cart</button>
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
 </div>
@@ -228,14 +230,19 @@
     <div class="container">
         <h2 class="title order__title">ORDER</h2>
         <div class="order__inner">
-            <form action="#" class="order__form">
+            <form action="mail.php" enctype="multipart/form-data" class="order__form" method="POST">
                 <h3 class="order__subtitle">Order Call</h3>
-                <label class="order__label order__label--first">
+                <input type="hidden" name="admin_email[]" value="andrew.ndrw1@gmail.com">
+                <input type="hidden" name="form_subject" value="Тема письма">
+                <label class="order__label form__label order__label--first">
                     <input type="text" class="order__name order__main" placeholder="Name" name="name">
                     <img src="images/order/cucumber.svg" alt="cucumber" class="order__cucumber">
                 </label>
-                <label class="order__label">
-                    <input type="tel" class="order__phone order__main" placeholder="Phone" name="phone">
+                <label class="order__label form__label">
+                    <input type="tel" data-validate-field="tel" class="order__phone order__main" placeholder="Phone" name="phone">
+                </label>
+                <label class="order__label form__label">
+                    <input type="mail" data-validate-field="email" class="order__mail order__main" placeholder="Email" name="email">
                 </label>
                 <button class="order__submit">Submit</button>
             </form>

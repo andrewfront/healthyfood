@@ -73,6 +73,9 @@ line-height: 31px;
     }
 
 }
+.form__label {
+    position: relative;
+}
 @media (max-width: 992px) {
     .order {
         margin-bottom: 50px;
