@@ -31,16 +31,16 @@
                                     <div class="header__cart-title">Fried Chicken</div>
                                     <div class="header__cart-price">5.75 $</div>
                                 </div>
-                                    <div class="header__cart-footer__content">
-                                        <div class="header__cart-footer__amount">Amount: <span>1</span></div>
-                                        <div class="header__cart-footer__total">Total: <span>5.75$</span></div>
-                                    </div>
                                 </div>
                                 <img src="images/cart/close.svg" alt="close" class="header__cart-close">
                                 <img src="images/cart/delete.svg" alt="bucket" class="header__cart-remove">
                             </div> -->
                         </div>
                         <div class="header__cart-footer">
+                            <div class="header__cart-footer__content">
+                                <div class="header__cart-footer__amount">Amount:<span class="amount"></span></div>
+                                <div class="header__cart-footer__total">Total:<span class="total"></span></div>
+                            </div>
                             <form action="#" class="header__cart-footer__order">
                                 <label class="header__cart-footer__order-label">
                                     <input type="text" class="header__cart-footer__order-input" placeholder="Name" name="name">
@@ -52,6 +52,7 @@
                                     <input type="email" class="header__cart-footer__order-input" placeholder="Email" name="phone">
                                 </label>
                                 <button class="header__cart-footer__gotonext">Order</button>
+                                <button class="header__cart-footer__gotonext footer__reset">Reset</button>
                             </form>
                         </div>
                     </div>
