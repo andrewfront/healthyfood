@@ -5,8 +5,10 @@ const filterMenu = () => {
     const cartContent = document.querySelector('.header__cart-wrapper')
     const cartOverlay = document.querySelector('.header__cart-overlay')
     const footerReset = document.querySelector('.footer__reset')
-    const closeCardBtn = document.querySelector('.header__cart-close')
+    const cartClose = document.querySelector('.header__cart-close')
+    const clearCart = document.querySelector('.footer__reset')
     const cartBtn = document.querySelector('.header__cart')
+    let cartCounter = document.querySelector('.header__cart-count')
     let cart = []
     let buttonsDOM = []
     class Products {
@@ -106,8 +108,8 @@ const filterMenu = () => {
         <div class="header__cart-price">${item.price} $</div>
     </div>
     </div>
-    <img src="images/cart/close.svg" alt="close" class="header__cart-close">
-    <img src="images/cart/delete.svg" alt="bucket" class="header__cart-remove">
+    <button type="button" class="header__cart-close">&#10008</button>
+    <img src="images/cart/delete.svg" alt="bucket" class="header__cart-remove" data-id=${item.id}>
     `
     cartContent.appendChild(div)
     }
@@ -116,16 +118,66 @@ const filterMenu = () => {
     }
     setupAPP() {
     cart = Storage.getCart()
-    this.setCartValues()
+    this.setCartValues(cart)
     this.populateCart(cart)
-    cartBtn.addEventListener('click', this.showCart)
-    closeCardBtn.addEventListener('click', this.hideCart)
+    cartBtn.addEventListener('click', () => {
+        if (cartContent.children.length > 0) {
+            this.showCart()
+        } else if (cartContent.children.length < 0) {
+            this.hideCart()
+        }
+    })
     }
+    cartCounter() {
+        let tempAmount = 0
+
+    }
+
     populateCart(cart) {
         cart.forEach(item => this.addCartItem(item))
     }
     hideCart() {
         cartOverlay.classList.remove('showCart')
+    }
+    cartLogic() {
+clearCart.addEventListener('click', (e) => {
+    e.preventDefault()
+    this.clearCart()
+})
+cartContent.addEventListener('click', (event) => {
+    if (event.target.classList.contains('header__cart-close')) {
+        this.hideCart()
+    }
+    if (event.target.classList.contains('header__cart-remove')) {
+        let removeItem = event.target
+        let id = removeItem.dataset.id
+        cartContent.removeChild(removeItem.parentElement)
+        this.removeItem(id)
+        if (cartContent.children.length <= 0) {
+            this.hideCart()
+        }
+    }
+})
+    }
+    clearCart() {
+        let cartItems = cart.map(item => item.id)
+        cartItems.forEach(id => this.removeItem(id))
+        while(cartContent.children.length > 0) {
+            cartContent.removeChild(cartContent.children[0])
+        }
+        this.hideCart()
+    }
+    removeItem(id) {
+        cart = cart.filter(item => item.id !==id)
+        this.setCartValues(cart)
+        Storage.saveCart(cart)
+        let button = this.getSingleButton(id)
+        button.disabled = false
+        button.innerText = 'Add to cart'
+
+    }
+    getSingleButton(id) {
+        return buttonsDOM.find(button => button.dataset.id === id)
     }
     }
     class Storage {
@@ -146,13 +198,14 @@ const filterMenu = () => {
     const ui = new UI()
     const products = new Products()
     // настройка приложения
-    // ui.setupAPP()
+    ui.setupAPP()
     products.getProducts().then(products => {
         ui.displayProducts(products)
         Storage.saveProducts(products)
     })
     .then(() => {
         ui.getBagButtons()
+        ui.cartLogic()
     })
     }
     export default filterMenu

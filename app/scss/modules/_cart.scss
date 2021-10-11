@@ -15,8 +15,10 @@
 
 .header__cart-close {
     position: absolute;
-    top: -23px;
-    right: -25px;
+    top: 0px;
+    right: -32px;
+    background-color: $red;
+    border: none;
     cursor: pointer;
 }
 
