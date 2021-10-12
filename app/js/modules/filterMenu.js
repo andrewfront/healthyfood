@@ -4,8 +4,6 @@ const filterMenu = () => {
     let cardsTotal = document.querySelector('.total')
     const cartContent = document.querySelector('.header__cart-wrapper')
     const cartOverlay = document.querySelector('.header__cart-overlay')
-    const footerReset = document.querySelector('.footer__reset')
-    const cartClose = document.querySelector('.header__cart-close')
     const clearCart = document.querySelector('.footer__reset')
     const cartBtn = document.querySelector('.header__cart')
     let cartCounter = document.querySelector('.header__cart-count')
@@ -66,15 +64,16 @@ const filterMenu = () => {
             let id = button.dataset.id
             let inCart = cart.find(item => item.id === id)
             if (inCart) {
-                button.innerText = 'add more'
+                button.innerText = 'In cart'
+                button.disabled = true
             }
                 button.addEventListener('click', (e) => {
-                    e.target.innerText = 'Add More'
+                    e.target.innerText = 'In Cart'
+                    button.disabled = true
                     //получить продукты
                     let cartItem = {...Storage.getProduct(id), amount: 1}
                     //добавить в корзину
                     cart = [...cart, cartItem]
-                    console.log(cart);
                     //добавить в локальное хранилище
                     Storage.saveCart(cart)
                     //установить значение карточек
@@ -82,7 +81,8 @@ const filterMenu = () => {
                     //отобразить карточку
                     this.addCartItem(cartItem)
                     //показать карточку
-                    this.showCart()
+                    // this.showCart()
+                    this.flyImage()
                 })
         })
     }
@@ -96,6 +96,10 @@ const filterMenu = () => {
         })
         cardsTotal.innerText = parseFloat(tempTotal.toFixed(2))
         cardsAmount.innerText = itemsTotal
+        cartCounter.innerText = itemsTotal
+        if (cardsAmount.innerText === '0') {
+            this.hideCart()
+        }
     }
     addCartItem(item) {
     const div = document.createElement('div')
@@ -110,6 +114,11 @@ const filterMenu = () => {
     </div>
     <button type="button" class="header__cart-close">&#10008</button>
     <img src="images/cart/delete.svg" alt="bucket" class="header__cart-remove" data-id=${item.id}>
+    <div class="header__item-count">
+    <img src="images/cart/up.svg" alt="" class="header__arrow header__item-up" data-id=${item.id}>
+    <span class="header__item-number">${item.amount}</span>
+    <img src="images/cart/low.svg" alt="" class="header__arrow header__item-low" data-id=${item.id}>
+</div>
     `
     cartContent.appendChild(div)
     }
@@ -128,11 +137,6 @@ const filterMenu = () => {
         }
     })
     }
-    cartCounter() {
-        let tempAmount = 0
-
-    }
-
     populateCart(cart) {
         cart.forEach(item => this.addCartItem(item))
     }
@@ -147,6 +151,27 @@ clearCart.addEventListener('click', (e) => {
 cartContent.addEventListener('click', (event) => {
     if (event.target.classList.contains('header__cart-close')) {
         this.hideCart()
+    } else if (event.target.classList.contains('header__item-up')) {
+        let addAmount = event.target
+        let id = addAmount.dataset.id
+        let tempItem = cart.find(item => item.id === id)
+        tempItem.amount = tempItem.amount +1
+        Storage.saveCart(cart)
+        this.setCartValues(cart)
+        addAmount.nextElementSibling.innerText = tempItem.amount
+    } else if (event.target.classList.contains('header__item-low')) {
+        let lowerAmount = event.target
+        let id = lowerAmount.dataset.id
+        let tempItem = cart.find(item => item.id === id)
+        tempItem.amount = tempItem.amount -1
+        if (tempItem.amount > 0) {
+            Storage.saveCart(cart)
+            this.setCartValues(cart)
+            lowerAmount.previousElementSibling.innerText = tempItem.amount
+        } else {
+            cartContent.removeChild(lowerAmount.parentElement.parentElement)
+            this.removeItem(id)
+        }
     }
     if (event.target.classList.contains('header__cart-remove')) {
         let removeItem = event.target
@@ -158,6 +183,35 @@ cartContent.addEventListener('click', (event) => {
         }
     }
 })
+    }
+    flyImage() {
+
+        const headerCart = document.querySelector('.header__cart')
+        const menuImages = document.querySelectorAll('.menu__img')
+        menuImages.forEach(item => {
+            const cloneImage = item.cloneNode(true)
+            const imageFlyWidth = cloneImage.offsetWidth
+            const imageFlyHeight = cloneImage.offsetHeight
+            const imageFlyTop = cloneImage.getBoundingClientRect().top
+            const imageFlyLeft = cloneImage.getBoundingClientRect().left
+            cloneImage.setAttribute('class', 'fly')
+            cloneImage.style.cssText = `
+            width: ${imageFlyWidth}px;
+            height: ${imageFlyHeight}px;
+            left: ${imageFlyLeft}px;
+            top: ${imageFlyTop}px;
+            `
+            document.body.append(cloneImage)
+            const cartFlyLeft = headerCart.getBoundingClientRect().left
+            const cartFlyTop = headerCart.getBoundingClientRect().top
+            cloneImage.style.cssText = `
+            left: ${cartFlyLeft}px;
+            top: ${cartFlyTop}px;
+            width: 0px;
+            height: 0px;
+            opacity: 0;
+            `
+        })
     }
     clearCart() {
         let cartItems = cart.map(item => item.id)
@@ -205,6 +259,7 @@ cartContent.addEventListener('click', (event) => {
     })
     .then(() => {
         ui.getBagButtons()
+        ui.flyImage()
         ui.cartLogic()
     })
     }

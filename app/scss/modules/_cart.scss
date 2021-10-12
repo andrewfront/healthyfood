@@ -48,7 +48,13 @@
     height: 61px;
     object-fit: cover;
 }
-
+.header__arrow {
+    width: 30px;
+    cursor: pointer;
+}
+.header__item-number {
+    color: $black;
+}
 .header__cart-info {
     max-width: 200px;
     width: 100%;
