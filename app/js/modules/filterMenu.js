@@ -32,7 +32,7 @@ const filterMenu = () => {
         let result = ''
         products.forEach(product => {
             result += `
-            <div class="menu__item">
+            <div class="menu__item" data-id=${product.id}>
             <img src=${product.image} alt="menu" class="menu__img">
         <div class="menu__content">
                 <div class="menu__subtitle">${product.title}</div>
@@ -48,15 +48,26 @@ const filterMenu = () => {
         })
         cardsCenter.innerHTML = result
     }
-    // filterProducts(products) {
-    //     const filterBtns = [...document.querySelectorAll('.menu__btn')]
-    //     filterBtns.forEach(btn => {
-    //         btn.addEventListener('click', (e) => {
-    //             const categories = e.currentTarget.dataset.id
-    //             console.log(products.category);
-    //         })
-    //     })
-    // }
+    filterProducts(products) {
+        const filterBtns = [...document.querySelectorAll('.menu__btn')]
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                let btnCategory = e.currentTarget.dataset.id
+                const menuCategory = products.filter(function(menuItem) {
+                   if (menuItem.category === btnCategory) {
+                       return menuItem
+                   }
+                })
+                if (btnCategory === 'all') {
+                    this.displayProducts(products)
+                    this.getBagButtons()
+                } else {
+                    this.displayProducts(menuCategory)
+                    this.getBagButtons()
+                }
+            })
+        })
+    }
     getBagButtons() {
         const cartBtns = [...document.querySelectorAll('.menu__addtocart')]
         buttonsDOM = cartBtns
@@ -82,7 +93,6 @@ const filterMenu = () => {
                     this.addCartItem(cartItem)
                     //показать карточку
                     // this.showCart()
-                    this.flyImage()
                 })
         })
     }
@@ -184,35 +194,6 @@ cartContent.addEventListener('click', (event) => {
     }
 })
     }
-    flyImage() {
-
-        const headerCart = document.querySelector('.header__cart')
-        const menuImages = document.querySelectorAll('.menu__img')
-        menuImages.forEach(item => {
-            const cloneImage = item.cloneNode(true)
-            const imageFlyWidth = cloneImage.offsetWidth
-            const imageFlyHeight = cloneImage.offsetHeight
-            const imageFlyTop = cloneImage.getBoundingClientRect().top
-            const imageFlyLeft = cloneImage.getBoundingClientRect().left
-            cloneImage.setAttribute('class', 'fly')
-            cloneImage.style.cssText = `
-            width: ${imageFlyWidth}px;
-            height: ${imageFlyHeight}px;
-            left: ${imageFlyLeft}px;
-            top: ${imageFlyTop}px;
-            `
-            document.body.append(cloneImage)
-            const cartFlyLeft = headerCart.getBoundingClientRect().left
-            const cartFlyTop = headerCart.getBoundingClientRect().top
-            cloneImage.style.cssText = `
-            left: ${cartFlyLeft}px;
-            top: ${cartFlyTop}px;
-            width: 0px;
-            height: 0px;
-            opacity: 0;
-            `
-        })
-    }
     clearCart() {
         let cartItems = cart.map(item => item.id)
         cartItems.forEach(id => this.removeItem(id))
@@ -255,11 +236,11 @@ cartContent.addEventListener('click', (event) => {
     ui.setupAPP()
     products.getProducts().then(products => {
         ui.displayProducts(products)
+        ui.filterProducts(products)
         Storage.saveProducts(products)
     })
     .then(() => {
         ui.getBagButtons()
-        ui.flyImage()
         ui.cartLogic()
     })
     }
