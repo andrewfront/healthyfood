@@ -182,7 +182,7 @@ const filterMenu = () => {
       let result = '';
       products.forEach(product => {
         result += `
-            <div class="menu__item" data-id=${product.id}>
+            <div class="menu__item ${product.category}">
             <img src=${product.image} alt="menu" class="menu__img">
         <div class="menu__content">
                 <div class="menu__subtitle">${product.title}</div>
@@ -193,33 +193,32 @@ const filterMenu = () => {
             </div>
                 <button type="button" class="menu__addtocart" data-id=${product.id}>Add to cart</button>
             </div>
-         </div>
+        </div>
             `;
       });
       cardsCenter.innerHTML = result;
     }
 
-    filterProducts(products) {
+    filterProducts() {
+      const menuItems = document.querySelectorAll('.menu__item');
       const filterBtns = [...document.querySelectorAll('.menu__btn')];
       filterBtns.forEach(btn => {
         btn.addEventListener('click', e => {
           let btnCategory = e.currentTarget.dataset.id;
-          const menuCategory = products.filter(function (menuItem) {
-            if (menuItem.category === btnCategory) {
-              return menuItem;
+          menuItems.forEach(elem => {
+            elem.classList.remove('hideItem');
+            elem.classList.add('showItem');
+
+            if (!elem.classList.contains(btnCategory) && btnCategory !== 'all') {
+              elem.classList.add('hideItem');
+              elem.classList.remove('showItem');
             }
           });
-
-          if (btnCategory === 'all') {
-            this.displayProducts(products);
-            this.getBagButtons();
-          } else {
-            this.displayProducts(menuCategory);
-            this.getBagButtons();
-          }
         });
       });
-    }
+    } // animateCart(products) {
+    // }
+
 
     getBagButtons() {
       const cartBtns = [...document.querySelectorAll('.menu__addtocart')];
@@ -320,6 +319,7 @@ const filterMenu = () => {
       clearCart.addEventListener('click', e => {
         e.preventDefault();
         this.clearCart();
+        this.hideCart();
       });
       cartContent.addEventListener('click', event => {
         if (event.target.classList.contains('header__cart-close')) {
@@ -412,7 +412,8 @@ const filterMenu = () => {
 
   ui.setupAPP();
   products.getProducts().then(products => {
-    ui.displayProducts(products);
+    ui.displayProducts(products); // ui.animateCart(products)
+
     ui.filterProducts(products);
     Storage.saveProducts(products);
   }).then(() => {
