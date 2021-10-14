@@ -9,6 +9,7 @@ const filterMenu = () => {
     let cartCounter = document.querySelector('.header__cart-count')
     let cart = []
     let buttonsDOM = []
+    let productArray = []
     class Products {
         async getProducts() {
             try {
@@ -154,6 +155,45 @@ const filterMenu = () => {
     hideCart() {
         cartOverlay.classList.remove('showCart')
     }
+    getSendForm() {
+        cart = Storage.getCart()
+        let title = cart.map(item => item.title)
+        let price = cart.map(item => item.price)
+        let itemsAmount = cart.map(item => item.amount)
+        let totalSum = cardsTotal.textContent
+        let priceTotal = `Total price ${totalSum}`
+        let objSend = {}
+        objSend.title = title
+        objSend.price = price
+        objSend.productsAmount = itemsAmount
+        objSend.totalPrice = priceTotal
+        productArray.push(objSend)
+            }
+            sendForm() {
+                document.querySelector('.header__cart-footer__order').addEventListener('submit', (e) => {
+                    e.preventDefault()
+                    let self = e.currentTarget
+                    let formData = new FormData(self)
+                    let name = self.querySelector('[name="person-name"]').value
+                    let phone = self.querySelector('[name="person-phone"]').value
+                    let email = self.querySelector('[name="person-email"]').value
+                    formData.append('Goods', JSON.stringify(productArray))
+                    formData.append('person-name', name)
+                    formData.append('person-phone', phone)
+                    formData.append('person-email', email)
+                    let xhr = new XMLHttpRequest()
+                    xhr.onreadystatechange = function() {
+                        if (xhr.readyState === 4) {
+                            if (xhr.status === 200) {
+                                console.log('Your order has been send')
+                            }
+                        }
+                    }
+                    xhr.open('POST', 'mail.php', true)
+                    xhr.send(formData)
+                    self.reset()
+                })
+            }
  cartLogic() {
     clearCart.addEventListener('click', (e) => {
     e.preventDefault()
@@ -217,6 +257,11 @@ cartContent.addEventListener('click', (event) => {
     getSingleButton(id) {
     return buttonsDOM.find(button => button.dataset.id === id)
     }
+    validatePhone() {
+        const maskPhone = document.querySelector('.phoneinput')
+        const im = new Inputmask("+7 (999) 999 99 99", { showMaskOnHover: false });
+        im.mask(maskPhone);
+    }
     }
     class Storage {
     static saveProducts(products) {
@@ -246,6 +291,9 @@ cartContent.addEventListener('click', (event) => {
     .then(() => {
         ui.getBagButtons()
         ui.cartLogic()
+        ui.getSendForm()
+        ui.sendForm()
+        ui.validatePhone()
     })
     }
     export default filterMenu
