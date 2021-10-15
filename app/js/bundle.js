@@ -183,7 +183,7 @@ const filterMenu = () => {
       let result = '';
       products.forEach(product => {
         result += `
-            <div class="menu__item ${product.category}">
+            <div class="menu__item ${product.category}" data-pid="${product.id}">
             <img src=${product.image} alt="menu" class="menu__img">
         <div class="menu__content">
                 <div class="menu__subtitle">${product.title}</div>
@@ -217,9 +217,7 @@ const filterMenu = () => {
           });
         });
       });
-    } // animateCart(products) {
-    // }
-
+    }
 
     getBagButtons() {
       const cartBtns = [...document.querySelectorAll('.menu__addtocart')];
@@ -316,6 +314,48 @@ const filterMenu = () => {
       cartOverlay.classList.remove('showCart');
     }
 
+    animateCart(products) {
+      // document.querySelectorAll('.menu__item').forEach(item => {
+      //     item.querySelector('.menu__addtocart').addEventListener('click', (e) => {
+      //         document.body.appendChild('.menu__img').cloneNode().classList.add('floating')
+      //     })
+      //     console.log(item);
+      // })
+      // console.log(menu);
+      // document.querySelectorAll(".menu__item").forEach(function(item) {
+      // item.querySelector(".menu__addtocart").addEventListener("click", function() {
+      // document.body.appendChild(item.querySelector(".menu__img").cloneNode()).classList.add("floating");
+      const menuItem = document.querySelectorAll('.menu__item');
+      menuItem.forEach(item => {
+        let getButton = item.querySelector('.menu__addtocart');
+        getButton.addEventListener('click', e => {
+          let cloneImage = item.querySelector(".menu__img").cloneNode(true);
+          let imageFlyWidth = cloneImage.offsetWidth;
+          let imageFlyHeight = cloneImage.offsetHeight;
+          let imageFlyTop = cloneImage.getBoundingClientRect().top;
+          let imageFlyLeft = cloneImage.getBoundingClientRect().left;
+          cloneImage.setAttribute('class', 'flyImage');
+          cloneImage.style.cssText = `
+                width: ${imageFlyWidth}px;
+                height: ${imageFlyHeight}px;
+                left: ${imageFlyLeft}px;
+                top: ${imageFlyTop}px;
+                `;
+          document.body.appendChild(cloneImage); // const cartFlyLeft = cartCounter.getBoundingClientRect().left
+          // const cartFlyTop = cartCounter.getBoundingClientRect().top
+          // cloneImage.style.cssText = `
+          // left: ${cartFlyLeft}px;
+          // top: ${cartFlyTop}px;
+          // width: 0px;
+          // height: 0px;
+          // opacity: 0;
+          // `
+        });
+      });
+      const headerCart = document.querySelector('.header__cart-count'); // });
+      // });
+    }
+
     getSendForm() {
       cart = Storage.getCart();
       let title = cart.map(item => item.title);
@@ -335,27 +375,60 @@ const filterMenu = () => {
       document.querySelector('.header__cart-footer__order').addEventListener('submit', e => {
         e.preventDefault();
         let self = e.currentTarget;
-        let formData = new FormData(self);
+        let Data = new FormData(self);
         let name = self.querySelector('[name="person-name"]').value;
         let phone = self.querySelector('[name="person-phone"]').value;
         let email = self.querySelector('[name="person-email"]').value;
-        formData.append('Goods', JSON.stringify(productArray));
-        formData.append('person-name', name);
-        formData.append('person-phone', phone);
-        formData.append('person-email', email);
-        let xhr = new XMLHttpRequest();
+        Data.append('Goods', JSON.stringify(productArray));
+        Data.append('person-name', name);
+        Data.append('person-phone', phone);
+        Data.append('person-email', email);
 
-        xhr.onreadystatechange = function () {
-          if (xhr.readyState === 4) {
-            if (xhr.status === 200) {
-              console.log('Your order has been send');
+        let validate = function (selector, rules, successModal, yaGoal) {
+          new window.JustValidate(selector, {
+            rules: rules,
+            submitHandler: function (self) {
+              // let formData = new FormData(self)
+              let xhr = new XMLHttpRequest();
+
+              xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4) {
+                  if (xhr.status === 200) {
+                    console.log('Your order has been send');
+                  } else {
+                    console.log('PLease try again');
+                  }
+                }
+              };
+
+              xhr.open("POST", "mail.php", true);
+              xhr.send(Data);
+              self.reset();
             }
-          }
+          });
         };
 
-        xhr.open('POST', 'mail.php', true);
-        xhr.send(formData);
-        self.reset();
+        validate('.header__cart-footer__order', {
+          email: {
+            required: true,
+            email: true
+          },
+          tel: {
+            required: true,
+            tel: true
+          }
+        }, '.thanks-popup', '.send goal'); // Пример отправки
+        // let xhr = new XMLHttpRequest()
+        // xhr.onreadystatechange = function() {
+        //     if (xhr.readyState === 4) {
+        //         if (xhr.status === 200) {
+        //             console.log('Your order has been send')
+        //         }
+        //     }
+        // }
+        // xhr.open('POST', 'mail.php', true)
+        // xhr.send(formData)
+        // self.reset()
       });
     }
 
@@ -468,6 +541,7 @@ const filterMenu = () => {
 
     ui.filterProducts(products);
     Storage.saveProducts(products);
+    ui.animateCart(products);
   }).then(() => {
     ui.getBagButtons();
     ui.cartLogic();
@@ -507,7 +581,7 @@ const mail = () => {
         xhr.onreadystatechange = function () {
           if (xhr.readyState === 4) {
             if (xhr.status === 200) {
-              console.log('Отправлено');
+              console.log('Your phone has been send');
             }
           }
         };

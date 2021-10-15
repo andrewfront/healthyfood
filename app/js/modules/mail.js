@@ -11,7 +11,7 @@ const mail = () => {
                 xhr.onreadystatechange = function() {
                     if (xhr.readyState === 4) {
                         if (xhr.status === 200) {
-                            console.log('Отправлено')
+                            console.log('Your phone has been send')
                         }
                     }
                 }
