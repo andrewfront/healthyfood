@@ -152,53 +152,43 @@ const filterMenu = () => {
     hideCart() {
         cartOverlay.classList.remove('showCart')
     }
-    animateCart(products) {
-    // document.querySelectorAll('.menu__item').forEach(item => {
-    //     item.querySelector('.menu__addtocart').addEventListener('click', (e) => {
-    //         document.body.appendChild('.menu__img').cloneNode().classList.add('floating')
-    //     })
-    //     console.log(item);
-    // })
-    // console.log(menu);
-        // document.querySelectorAll(".menu__item").forEach(function(item) {
-        // item.querySelector(".menu__addtocart").addEventListener("click", function() {
-        // document.body.appendChild(item.querySelector(".menu__img").cloneNode()).classList.add("floating");
+    animateCart() {
         const menuItem = document.querySelectorAll('.menu__item')
         menuItem.forEach(item => {
             let getButton = item.querySelector('.menu__addtocart')
             getButton.addEventListener('click', (e) => {
-                let cloneImage = item.querySelector(".menu__img").cloneNode(true)
-                let imageFlyWidth = cloneImage.offsetWidth
-                let imageFlyHeight = cloneImage.offsetHeight
-                let imageFlyTop = cloneImage.getBoundingClientRect().top
-                let imageFlyLeft = cloneImage.getBoundingClientRect().left
-                cloneImage.setAttribute('class', 'flyImage')
-                cloneImage.style.cssText = `
+                e.preventDefault()
+                let productImage = item.querySelector(".menu__img")
+                let productImageFly = productImage.cloneNode(true)
+                let imageFlyWidth = productImage.offsetWidth
+                let imageFlyHeight = productImage.offsetHeight
+                let imageFlyTop = productImage.getBoundingClientRect().top
+                let imageFlyLeft = productImage.getBoundingClientRect().left
+                productImageFly.setAttribute('class', 'flyImage')
+                productImageFly.style.cssText = `
                 width: ${imageFlyWidth}px;
                 height: ${imageFlyHeight}px;
                 left: ${imageFlyLeft}px;
                 top: ${imageFlyTop}px;
                 `
-                document.body.appendChild(cloneImage)
-                // const cartFlyLeft = cartCounter.getBoundingClientRect().left
-                // const cartFlyTop = cartCounter.getBoundingClientRect().top
-                // cloneImage.style.cssText = `
-                // left: ${cartFlyLeft}px;
-                // top: ${cartFlyTop}px;
-                // width: 0px;
-                // height: 0px;
-                // opacity: 0;
-                // `
+                document.body.append(productImageFly)
+                const cartFlyLeft = cartCounter.getBoundingClientRect().left
+                const cartFlyTop = cartCounter.getBoundingClientRect().top
+                productImageFly.style.cssText = `
+                left: ${cartFlyLeft}px;
+                top: ${cartFlyTop}px;
+                width: 0px;
+                height: 0px;
+                opacity: 0;
+                `
+                productImageFly.addEventListener('transitionend', () => {
+                    if (getButton.disabled = true) {
+                        productImageFly.remove()
+                    }
+                })
             })
         })
 
-
-
-
-        const headerCart = document.querySelector('.header__cart-count')
-
-        // });
-    // });
     }
     getSendForm() {
         cart = Storage.getCart()
