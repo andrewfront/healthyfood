@@ -2,7 +2,9 @@
     margin-bottom: 167px;
     position: relative;
     margin-top: 227px;
-
+    &__img img {
+        border-radius: 50%;
+    }
     &__inner {
         display: flex;
         align-items: center;

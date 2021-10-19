@@ -123,7 +123,19 @@
     left: 0;
     transition: all 0.5s linear;
     z-index: 100;
+    animation-name: rotate-center;
+    animation-duration: 1s;
 }
+@keyframes rotate-center {
+    0% {
+      -webkit-transform: rotate(0);
+              transform: rotate(0);
+    }
+    100% {
+      -webkit-transform: rotate(360deg);
+              transform: rotate(360deg);
+    }
+  }
 @media (max-width: 1416px) {
     .menu__btn-container {
         display: flex;

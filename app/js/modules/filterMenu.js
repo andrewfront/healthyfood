@@ -1,4 +1,10 @@
 const filterMenu = () => {
+    const client = contentful.createClient({
+        // This is the space ID. A space is like a project folder in Contentful terms
+        space: "kcyqf93mctty",
+        // This is the access token for this space. Normally you get both ID and the token in the Contentful web app
+        accessToken: "WbsyGYR9cAhei6kOvRFy6QJ9ZmOac0cyXYuZLeT18nI"
+      });
     const cardsCenter = document.querySelector('.menu__inner')
     let cardsAmount = document.querySelector('.amount')
     let cardsTotal = document.querySelector('.total')
@@ -13,14 +19,18 @@ const filterMenu = () => {
     class Products {
         async getProducts() {
             try {
-                let result = await fetch('../products.json')
-                let data = await result.json()
-                let products = data.items
+                let contentful = await client.getEntries({
+                    content_type: 'healthyfood'
+                  })
+                // let result = await fetch('../products.json')
+                // let data = await result.json()
+                // let products = data.items
+                let products = contentful.items
                 products = products.map(item => {
-                    const {title, price} = item.fields
-                    const {id, category} = item.sys
+                    const {category, title, price} = item.fields
+                    const {id} = item.sys
                     const image = item.fields.image.fields.file.url
-                    return {title, price, id, category, image}
+                    return {category, title, price, id, image}
                 })
                 return products
             } catch (error) {
@@ -33,7 +43,7 @@ const filterMenu = () => {
         let result = ''
         products.forEach(product => {
             result += `
-            <div class="menu__item ${product.category}" data-pid="${product.id}">
+            <div class="menu__item ${product.category}" data-id="${product.id}">
             <img src=${product.image} alt="menu" class="menu__img">
         <div class="menu__content">
                 <div class="menu__subtitle">${product.title}</div>

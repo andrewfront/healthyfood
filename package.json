@@ -33,11 +33,12 @@
   },
   "dependencies": {
     "@babel/polyfill": "^7.12.1",
+    "aos": "^2.3.4",
     "es6-promise-polyfill": "^1.2.0",
+    "flickity": "^2.2.2",
     "inputmask": "^5.0.6",
     "just-validate": "^1.5.0",
     "nodelist-foreach-polyfill": "^1.2.0",
-    "swiper": "^6.0.2",
     "uninstall": "0.0.0"
   }
 }
