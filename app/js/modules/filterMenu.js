@@ -16,6 +16,18 @@ const filterMenu = () => {
     let cart = []
     let buttonsDOM = []
     let productArray = []
+    let scroll = calcScroll()
+    function calcScroll() {
+        let div = document.createElement('div')
+        div.style.width = '50px'
+        div.style.height = '50px'
+        div.style.overflowY = 'scroll'
+        div.style.visibility = 'hidden'
+        document.body.appendChild(div)
+        let scrollWidth = div.offsetWidth - div.clientWidth
+        div.remove()
+        return scrollWidth
+    }
     class Products {
         async getProducts() {
             try {
@@ -143,6 +155,8 @@ const filterMenu = () => {
     }
     showCart() {
     cartOverlay.classList.add('showCart')
+    document.body.style.overflow = 'hidden'
+    document.body.style.marginRight = `${scroll}px`
     }
     setupAPP() {
     cart = Storage.getCart()
@@ -161,6 +175,8 @@ const filterMenu = () => {
     }
     hideCart() {
         cartOverlay.classList.remove('showCart')
+        document.body.style.overflow = ''
+        document.body.style.marginRight = `0px`
     }
     animateCart() {
         const menuItem = document.querySelectorAll('.menu__item')
